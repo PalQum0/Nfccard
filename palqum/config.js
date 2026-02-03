@@ -10,7 +10,7 @@ const CONFIG = {
         name: "Ibrahem Qumsieh",
         title: "Founder of PalQum",
         bio: "Smart Digital Solutions for Modern Businesses",
-        image: "https://palqum.com/info/logo-new.png"
+        image: "https://palqum.com/nfclogos/palqum.jpeg"
     },
 
     // ==================== MAIN LINKS ====================
