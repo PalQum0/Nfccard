@@ -7,7 +7,7 @@ console.log('config.js is loading...');
 const CONFIG = {
     // ==================== PROFILE INFO ====================
     profile: {
-        name: "Naem Jaraiseh",
+        name: "Naeem Jaraiseh",
         title: "DJ",
         bio: "DJ Naeem Jaraiseh is a Palestinian DJ, Remix maker and DJ for parties and events",
         image: "https://palqum.com/nfclogos/djnaem.jfif"
@@ -98,8 +98,8 @@ const CONFIG = {
             url: "https://www.tiktok.com/@palqum"
         },
         snapchat: {
-            enabled: false,
-            url: ""
+            enabled: true,
+            url: "https://snapchat.com/t/DkRWio25"
         }
     },
 
