@@ -9,7 +9,7 @@ const CONFIG = {
     profile: {
         name: "Jeries Banoura",
         title: "Interior Designer",
-        bio: "-",
+        bio: "Carpentry Design & Cnc Creations",
         image: "https://palqum.com/nfclogos/jb.png"
     },
 
