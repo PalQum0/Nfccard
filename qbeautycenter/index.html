@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Q Beauty Center</title>
+    <link rel="stylesheet" href="style.css?v=6">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Tajawal:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Animated Background -->
+    <div class="bg-layer">
+        <div class="bg-gradient"></div>
+        <div class="bg-noise"></div>
+        <div class="bg-orbs">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+            <div class="orb orb-4"></div>
+        </div>
+        <canvas id="sparkleCanvas" class="sparkle-canvas"></canvas>
+    </div>
+
+    <div class="container">
+        <div class="profile-card">
+            <!-- Cover / Banner Area -->
+            <div class="card-cover">
+                <div class="cover-gradient"></div>
+                <div class="cover-pattern"></div>
+                <div class="cover-shimmer"></div>
+            </div>
+
+            <!-- Profile Image - overlapping cover -->
+            <div class="profile-image-section">
+                <div class="profile-image-wrapper">
+                    <div class="image-ring"></div>
+                    <div class="image-ring-inner"></div>
+                    <img src="https://ui-avatars.com/api/?name=Q&background=c39fcc&color=fff&size=240" alt="Profile" class="profile-image" id="profileImage">
+                    <div class="image-shine"></div>
+                </div>
+            </div>
+
+            <!-- Profile Info -->
+            <div class="profile-header">
+                <h1 class="profile-name" id="profileName">Loading...</h1>
+                <div class="elegant-divider">
+                    <span class="ed-wing ed-wing-right"></span>
+                    <span class="ed-icon">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="currentColor" opacity="0.6"/>
+                        </svg>
+                    </span>
+                    <span class="ed-wing ed-wing-left"></span>
+                </div>
+                <p class="profile-title" id="profileTitle">Please wait...</p>
+                <p class="profile-bio" id="profileBio">Loading profile information...</p>
+            </div>
+
+            <!-- Main Links -->
+            <div class="links-container" id="linksContainer"></div>
+
+            <!-- Social Links -->
+            <div class="social-section">
+                <div class="social-divider">
+                    <span class="sd-line"></span>
+                    <span class="sd-text">Follow Us</span>
+                    <span class="sd-line"></span>
+                </div>
+                <div class="social-links" id="socialLinks"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js?v=8"></script>
+    <script src="script.js?v=8"></script>
+</body>
+</html>
