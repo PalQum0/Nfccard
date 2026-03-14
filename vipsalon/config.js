@@ -41,10 +41,10 @@ const CONFIG = {
             url: "tel:+972598076294"
         },
         {
-            enabled: false,
-            icon: "email",
-            text: "Email",
-            url: ""
+            enabled: true,
+            icon: "phone",
+            text: "Call Me(2)",
+            url: "tel:+972568092124"
         },
         {
             enabled: false,
