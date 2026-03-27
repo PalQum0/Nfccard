@@ -55,7 +55,7 @@ const CONFIG = {
         {
             enabled: true,
             icon: "location",
-            text: "موقعنا",
+            text: "Location",
             url: "https://maps.app.goo.gl/u3MZsPs92aygqSY48?g_st=ic"
         },
         {
