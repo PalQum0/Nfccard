@@ -86,8 +86,8 @@ const CONFIG = {
             url: "https://www.facebook.com/share/1AjSRSPQ6A/?mibextid=wwXIfr"
         },
         instagram: {
-            enabled: false,
-            url: "https://www.instagram.com/jiries_i_musleh?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+            enabled: true,
+            url: "https://www.instagram.com/d.fdyfd"
         },
         twitter: {
             enabled: false,
@@ -142,7 +142,7 @@ const CONFIG = {
         // - Floating shape 2 (bottom right)
         
         // ========== BACKGROUND COLORS ==========
-        bgDark: "#252525",
+        bgDark: "transparent",
         // What it changes:
         // - Main page background color
         
