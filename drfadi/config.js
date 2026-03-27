@@ -10,7 +10,7 @@ const CONFIG = {
         name: " د. فادي ابو فضة",
         title: "طب وجراحة الأنف والأذن والحنجرة",
         bio: "",
-        image: "https://palqum.com/nfclogos/drfadi.jpeg"
+        image: "https://palqum.com/nfclogos/drfadi1.jpeg"
     },
 
     // ==================== CONTACT INFO FOR vCard ====================
