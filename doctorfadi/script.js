@@ -328,10 +328,14 @@ function applyTheme() {
         }
         
         // ========== BACKGROUND COLORS ==========
-        if (CONFIG.theme.bgDark) {
-            console.log('Setting bg-dark:', CONFIG.theme.bgDark);
-            root.style.setProperty('--bg-dark', CONFIG.theme.bgDark);
-        }
+if (CONFIG.theme.bgDark) {
+    root.style.setProperty('--bg-dark', CONFIG.theme.bgDark);
+    document.body.style.backgroundImage = "url('https://palqum.com/nfclogos/drfadi2.jpg')";
+    document.body.style.backgroundSize = "contain";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundColor = "#1a1a1a";
+}
         
         if (CONFIG.theme.bgCard) {
             console.log('Setting bg-card:', CONFIG.theme.bgCard);
