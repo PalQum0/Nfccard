@@ -56,7 +56,7 @@ const CONFIG = {
             enabled: true,
             icon: "location",
             text: "موقعنا",
-            url: "https://www.google.com/maps/place/31°42'30.6%22N+35°12'00.2%22E/@31.7085,35.2000556,16z/data=!4m4!3m3!8m2!3d31.7085!4d35.2000556?g_ep=Eg1tbF8yMDI2MDMyNV8wIJvbDyoASAJQAg%3D%3D"
+            url: "https://maps.app.goo.gl/u3MZsPs92aygqSY48?g_st=ic"
         },
         {
             enabled: false,
