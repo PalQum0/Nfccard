@@ -7,8 +7,8 @@ console.log('config.js is loading...');
 const CONFIG = {
     // ==================== PROFILE INFO ====================
     profile: {
-        name: "Jiries Musleh",
-        title: "",
+        name: " د. فادي ابو فضة",
+        title: "طب وجراحة الأنف والأذن والحنجرة",
         bio: "",
         image: "https://palqum.com/nfclogos/jeries.jfif"
     },
@@ -17,11 +17,11 @@ const CONFIG = {
     // Used for "Add to Contacts" button
     contact: {
         enabled: true,  // Set to false to hide the button
-        phone: "+970599342096",
+        phone: "‪+972599041233‬",
         email: "",  // Optional
         website: "",  // Optional
-        address: "",  // Optional: "123 Street, City, Country"
-        organization: "",  // Optional
+        address: "بيت لحم، السينما، عمارة فريج الطابق الثاني، مقابل شركة الكهرباء",  // Optional: "123 Street, City, Country"
+        organization: "عيادة الدكتور فادي ابو فضة",  // Optional
         notes: ""  // Optional
     },
 
@@ -32,31 +32,31 @@ const CONFIG = {
             enabled: true,
             icon: "whatsapp",
             text: "WhatsApp",
-            url: "https://wa.me/970599342096"
+            url: "https://wa.me/972599041233"
         },
         {
             enabled: true,
             icon: "phone",
             text: "Call Me",
-            url: "tel:+970599342096"
+            url: "tel:+972599041233"
         },
         {
             enabled: true,
-            icon: "email",
-            text: "Email",
-            url: "mailto:jiriesmusleh199@gmail.com"
+            icon: "phone",
+            text: "العيادة",
+            url: "tel:+022749887"
         },
         {
-            enabled: true,
+            enabled: false,
             icon: "website",
             text: "Gloria's Catalog",
             url: "https://www.catalogmachine.com/GloriaInvestment/catalogs/Gloria.html"
         },
         {
-            enabled: false,
+            enabled: true,
             icon: "location",
-            text: "Location",
-            url: ""
+            text: "موقعنا",
+            url: "https://www.google.com/maps/place/31°42'30.6%22N+35°12'00.2%22E/@31.7085,35.2000556,16z/data=!4m4!3m3!8m2!3d31.7085!4d35.2000556?g_ep=Eg1tbF8yMDI2MDMyNV8wIJvbDyoASAJQAg%3D%3D"
         },
         {
             enabled: false,
@@ -83,10 +83,10 @@ const CONFIG = {
     social: {
         facebook: {
             enabled: true,
-            url: "https://www.facebook.com/jiries.i.musleh?mibextid=wwXIfr&rdid=l0lTL2T1TcExa9n2&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1752Pr9qif%2F%3Fmibextid%3DwwXIfr#"
+            url: "https://www.facebook.com/share/1AjSRSPQ6A/?mibextid=wwXIfr"
         },
         instagram: {
-            enabled: true,
+            enabled: false,
             url: "https://www.instagram.com/jiries_i_musleh?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
         },
         twitter: {
