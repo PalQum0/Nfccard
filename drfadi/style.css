@@ -38,7 +38,7 @@
 /* ==================== GLOBAL STYLES ==================== */
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-    background: url('https://palqum.com/nfclogos/drfadi2.jpg') center/contain no-repeat fixed;
+    background: url('https://palqum.com/nfclogos/drfadi2.jpg') center/contain no-repeat;
     background-color: #1a1a1a;
     color: var(--text-primary);
     min-height: 100vh;
