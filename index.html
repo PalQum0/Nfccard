@@ -6,8 +6,8 @@
     <title>PalQum | NFC Profiles</title>
     <style>
         :root {
-            --primary-color: #007AFF; /* Modern Blue */
-            --bg-gradient: linear-gradient(135deg, #1a1a1a 0%, #3d3d3d 100%);
+            --primary-color: #007AFF; 
+            --bg-gradient: linear-gradient(135deg, #0f0f0f 0%, #252525 100%);
         }
 
         body {
@@ -17,7 +17,6 @@
             margin: 0;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
             min-height: 100vh;
             color: white;
         }
@@ -31,64 +30,76 @@
         }
 
         .logo-area {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 800;
-            letter-spacing: -1px;
-            margin-bottom: 10px;
+            letter-spacing: -1.5px;
+            margin-bottom: 5px;
+            background: linear-gradient(to bottom, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .subtitle {
-            color: #bbb;
+            color: #777;
             margin-bottom: 40px;
             font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         #profile-list {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
         }
 
         .profile-link {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: white;
             text-decoration: none;
-            padding: 18px;
-            border-radius: 16px;
+            padding: 20px;
+            border-radius: 18px;
             font-weight: 500;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
+            font-size: 1.05rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-transform: capitalize;
-            display: block;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .profile-link::after {
+            content: '→';
+            opacity: 0.5;
+            font-size: 1.2rem;
         }
 
         .profile-link:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.02);
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-3px);
             border-color: var(--primary-color);
         }
 
         .loader {
-            border: 3px solid rgba(255,255,255,0.1);
-            border-top: 3px solid var(--primary-color);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-top: 2px solid #fff;
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
+            width: 24px;
+            height: 24px;
+            animation: spin 0.8s linear infinite;
             margin: 20px auto;
         }
 
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         .error-msg {
-            background: rgba(255, 0, 0, 0.1);
             color: #ff6b6b;
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 0.85rem;
+            padding: 20px;
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
     </style>
 </head>
@@ -96,7 +107,7 @@
 
 <div class="container">
     <div class="logo-area">PalQum</div>
-    <div class="subtitle">Select a profile to view links</div>
+    <div class="subtitle">NFC Digital Cards</div>
 
     <div id="status-container">
         <div class="loader" id="loader"></div>
@@ -106,55 +117,49 @@
 </div>
 
 <script>
-    /** 
-     * CONFIGURATION
-     * If your site is palqum.site and the repo is "my-nfc-repo" 
-     * and your username is "johndoe", set them below:
-     */
-    const GITHUB_USER = "REPLACE_WITH_YOUR_USERNAME"; 
-    const GITHUB_REPO = "REPLACE_WITH_YOUR_REPO_NAME";
+    // These are now correctly set based on your link
+    const GITHUB_USER = "PalQum0"; 
+    const GITHUB_REPO = "Nfccard";
 
     async function loadProfiles() {
         const profileList = document.getElementById('profile-list');
         const statusContainer = document.getElementById('status-container');
-        
-        // Ensure the URL is correctly formatted
         const url = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/`;
 
         try {
             const response = await fetch(url);
             
             if (!response.ok) {
-                throw new Error(`GitHub API returned ${response.status}. Check your Username and Repo name.`);
+                throw new Error("Could not connect to the profile database.");
             }
 
             const data = await response.json();
-            statusContainer.innerHTML = ''; // Clear loader
+            statusContainer.innerHTML = ''; 
 
-            // Filter for folders and ignore hidden files
-            const folders = data.filter(item => item.type === 'dir' && !item.name.startsWith('.'));
+            // Filter for directories and ignore non-profile folders
+            const folders = data.filter(item => 
+                item.type === 'dir' && 
+                !item.name.startsWith('.') && 
+                item.name !== 'assets' // If you ever add an assets folder, this ignores it
+            );
 
             if (folders.length === 0) {
-                statusContainer.innerHTML = '<p>No profiles found in this repository.</p>';
+                statusContainer.innerHTML = '<p style="color:#555">No active profiles found.</p>';
                 return;
             }
 
             folders.forEach(folder => {
                 const link = document.createElement('a');
-                link.href = `./${folder.name}/`; 
+                // Use absolute path from root for the custom domain
+                link.href = `https://palqum.site/${folder.name}/`; 
                 link.className = 'profile-link';
-                // Beautify name: replace dashes/underscores with spaces
                 link.innerText = folder.name.replace(/[-_]/g, ' ');
                 profileList.appendChild(link);
             });
 
         } catch (error) {
-            statusContainer.innerHTML = `
-                <div class="error-msg">
-                    <strong>Error:</strong> ${error.message}<br><br>
-                    Make sure the username and repo name in the code are correct.
-                </div>`;
-            console.error("PalQum Error:", error);
+            statusContainer.innerHTML = `<div class="error-msg">Unable to load profiles. Please try again later.</div>`;
+            console.error("API Error:", error);
         }
     }
 
