@@ -3,51 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PalQum NFC Cards</title>
+    <title>PalQum | NFC Profiles</title>
     <style>
-        body { font-family: sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; padding-top: 50px; }
-        .container { width: 90%; max-width: 400px; text-align: center; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        .profile-link { display: block; background: #000; color: white; text-decoration: none; padding: 15px; margin-bottom: 10px; border-radius: 10px; font-weight: bold; text-transform: capitalize; }
-        #loader { color: #888; font-style: italic; }
+        :root {
+            --primary-color: #007AFF; /* Modern Blue */
+            --bg-gradient: linear-gradient(135deg, #1a1a1a 0%, #3d3d3d 100%);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 420px;
+            margin-top: 60px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .logo-area {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #bbb;
+            margin-bottom: 40px;
+            font-size: 0.9rem;
+        }
+
+        #profile-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .profile-link {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            padding: 18px;
+            border-radius: 16px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            text-transform: capitalize;
+            display: block;
+        }
+
+        .profile-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
+            border-color: var(--primary-color);
+        }
+
+        .loader {
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .error-msg {
+            background: rgba(255, 0, 0, 0.1);
+            color: #ff6b6b;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>PalQum NFC Profiles</h1>
-    <div id="loader">Loading profiles...</div>
+    <div class="logo-area">PalQum</div>
+    <div class="subtitle">Select a profile to view links</div>
+
+    <div id="status-container">
+        <div class="loader" id="loader"></div>
+    </div>
+    
     <div id="profile-list"></div>
 </div>
 
 <script>
-    // EDIT THESE TWO LINES:
-    const username = "YOUR_GITHUB_USERNAME"; 
-    const repo = "YOUR_REPO_NAME";
+    /** 
+     * CONFIGURATION
+     * If your site is palqum.site and the repo is "my-nfc-repo" 
+     * and your username is "johndoe", set them below:
+     */
+    const GITHUB_USER = "REPLACE_WITH_YOUR_USERNAME"; 
+    const GITHUB_REPO = "REPLACE_WITH_YOUR_REPO_NAME";
 
     async function loadProfiles() {
-        const url = `https://api.github.com/repos/${username}/${repo}/contents/`;
         const profileList = document.getElementById('profile-list');
-        const loader = document.getElementById('loader');
+        const statusContainer = document.getElementById('status-container');
+        
+        // Ensure the URL is correctly formatted
+        const url = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/`;
 
         try {
             const response = await fetch(url);
+            
+            if (!response.ok) {
+                throw new Error(`GitHub API returned ${response.status}. Check your Username and Repo name.`);
+            }
+
             const data = await response.json();
+            statusContainer.innerHTML = ''; // Clear loader
 
-            loader.style.display = 'none';
+            // Filter for folders and ignore hidden files
+            const folders = data.filter(item => item.type === 'dir' && !item.name.startsWith('.'));
 
-            data.forEach(item => {
-                // Only show items that are directories and don't start with a dot
-                if (item.type === 'dir' && !item.name.startsWith('.')) {
-                    const link = document.createElement('a');
-                    link.href = `/${item.name}/`;
-                    link.className = 'profile-link';
-                    link.innerText = item.name.replace(/-/g, ' '); // replaces dashes with spaces for better look
-                    profileList.appendChild(link);
-                }
+            if (folders.length === 0) {
+                statusContainer.innerHTML = '<p>No profiles found in this repository.</p>';
+                return;
+            }
+
+            folders.forEach(folder => {
+                const link = document.createElement('a');
+                link.href = `./${folder.name}/`; 
+                link.className = 'profile-link';
+                // Beautify name: replace dashes/underscores with spaces
+                link.innerText = folder.name.replace(/[-_]/g, ' ');
+                profileList.appendChild(link);
             });
+
         } catch (error) {
-            loader.innerText = "Error loading profiles.";
-            console.error(error);
+            statusContainer.innerHTML = `
+                <div class="error-msg">
+                    <strong>Error:</strong> ${error.message}<br><br>
+                    Make sure the username and repo name in the code are correct.
+                </div>`;
+            console.error("PalQum Error:", error);
         }
     }
 
