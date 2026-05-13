@@ -1,16 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>PalQum NFC Cards</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PalQum NFC Cards</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; padding-top: 50px; }
+        .container { width: 90%; max-width: 400px; text-align: center; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .profile-link { display: block; background: #000; color: white; text-decoration: none; padding: 15px; margin-bottom: 10px; border-radius: 10px; font-weight: bold; text-transform: capitalize; }
+        #loader { color: #888; font-style: italic; }
+    </style>
 </head>
-<body style="font-family:sans-serif;text-align:center;margin-top:50px;">
+<body>
 
-<h1>PalQum NFC Profiles</h1>
+<div class="container">
+    <h1>PalQum NFC Profiles</h1>
+    <div id="loader">Loading profiles...</div>
+    <div id="profile-list"></div>
+</div>
 
-<a href="/ibrahimqum/">Ibrahem Qumsieh</a><br><br>
-<a href="/3hatab/">3hatab</a><br><br>
-<a href="/jacob/">Jacob</a><br><br>
+<script>
+    // EDIT THESE TWO LINES:
+    const username = "YOUR_GITHUB_USERNAME"; 
+    const repo = "YOUR_REPO_NAME";
+
+    async function loadProfiles() {
+        const url = `https://api.github.com/repos/${username}/${repo}/contents/`;
+        const profileList = document.getElementById('profile-list');
+        const loader = document.getElementById('loader');
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+
+            loader.style.display = 'none';
+
+            data.forEach(item => {
+                // Only show items that are directories and don't start with a dot
+                if (item.type === 'dir' && !item.name.startsWith('.')) {
+                    const link = document.createElement('a');
+                    link.href = `/${item.name}/`;
+                    link.className = 'profile-link';
+                    link.innerText = item.name.replace(/-/g, ' '); // replaces dashes with spaces for better look
+                    profileList.appendChild(link);
+                }
+            });
+        } catch (error) {
+            loader.innerText = "Error loading profiles.";
+            console.error(error);
+        }
+    }
+
+    loadProfiles();
+</script>
 
 </body>
 </html>
