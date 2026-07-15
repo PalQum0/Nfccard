@@ -13,14 +13,18 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
         body {
             font-family: 'Tajawal', sans-serif;
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
-            overflow-x: hidden;
             position: relative;
             background-color: #111;
         }
@@ -31,7 +35,7 @@
             position: fixed;
             inset: 0;
             background-image: url('https://palqum.com/nfclogos/drhaitham.jfif');
-            background-size: contain;
+            background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-color: #111;
