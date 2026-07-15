@@ -28,11 +28,11 @@
         /* Background image layer */
         body::before {
             content: '';
-            position: fixed;
+            position: absolute;
             inset: 0;
             background-image: url('https://palqum.com/nfclogos/drhaitham.jfif');
-            background-size: contain;
-            background-position: center;
+            background-size: cover;
+            background-position: center top;
             background-repeat: no-repeat;
             background-color: #111;
             z-index: 0;
@@ -41,7 +41,7 @@
         /* Dark overlay for readability */
         body::after {
             content: '';
-            position: fixed;
+            position: absolute;
             inset: 0;
             background: rgba(0, 0, 0, 0.45);
             z-index: 1;
